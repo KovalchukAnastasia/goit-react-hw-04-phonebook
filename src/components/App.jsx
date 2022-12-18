@@ -11,7 +11,13 @@ Notify.init({ position: 'center-top' });
 
 export default function App() {
   const [contactArr, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
+    const savedContacts = localStorage.getItem('contacts');
+    if (savedContacts !== null) {
+      const parcedContacts = JSON.parse(savedContacts);
+      return parcedContacts;
+    }
+    return [];
+    // return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
   });
 
   const [filter, setFilter] = useState('');
